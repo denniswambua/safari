@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import PropTypes from "prop-types";
 
-import Screens from "./Screens";
+import Screen from "./Screens";
 
 
 class Form extends Component{
@@ -11,16 +11,16 @@ class Form extends Component{
     }
 
     state ={
-        initial_screen: "",
-        languages: []
+        initial_screen: this.props.data.initial_screen,
+        languages: this.props.data.languages,
     };
 
 
     createLanguageItems(languages) {
         let items = [];         
-        for (let i = 0; i <= languages.length; i++) {             
-             items.push(<option key={i} value={languages[i]}>{languages[i]}</option>);   
-        }
+        languages.forEach(function(lang){
+            items.push(<option key={lang} value={lang}>{lang}</option>);   
+        });
         return items;
     }  
 
@@ -29,8 +29,6 @@ class Form extends Component{
         if (JSON.stringify(this.props.data) === JSON.stringify({})){
             message = <p>Nothing to show</p>
         }else{
-            this.state.initial_screen = this.props.data.initial_screen
-            this.state.languages = this.props.data.languages
             message = (
                 <div>
                     <div className="field">
@@ -48,7 +46,7 @@ class Form extends Component{
                         </div>
                     </div>
                     <h2 className="subtitle">Screens</h2>
-                    <div className="box"><Screens /></div>
+                    <div className="box" ><Screen /></div>
                     
                 </div>
             )
