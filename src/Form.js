@@ -1,10 +1,14 @@
 import React, {Component} from "react";
 import PropTypes from "prop-types";
 
-import Screen from "./Screens";
+import Screens from "./Screens";
 
 
 class Form extends Component{
+    constructor(props) {
+        super(props);
+        this.handleLanguageChange = this.handleLanguageChange.bind(this);
+      }
 
     static propTypes = {
         data: PropTypes.object.isRequired
@@ -12,9 +16,14 @@ class Form extends Component{
 
     state ={
         initial_screen: this.props.data.initial_screen,
-        languages: this.props.data.languages,
+        screens: this.props.data.screens,
+        language: this.props.data.languages[0]
     };
 
+    handleLanguageChange(e) {
+        this.setState({language: e.target.value});
+    }
+    
 
     createLanguageItems(languages) {
         let items = [];         
@@ -41,12 +50,14 @@ class Form extends Component{
                         <label className="label">Languages</label>
                         <div className="control">
                             <div className="select">
-                                <select>{this.createLanguageItems(this.state.languages)}</select>
+                                <select onChange={this.handleLanguageChange} value={this.state.language}>
+                                {this.createLanguageItems(this.props.data.languages)}</select>
                             </div>
                         </div>
                     </div>
                     <h2 className="subtitle">Screens</h2>
-                    <div className="box" ><Screen /></div>
+                    <div className="box" ><Screens screens={this.state.screens} language={this.state.language}
+                        handleLanguageChange={this.handleLanguageChange.bind(this)}/></div>
                     
                 </div>
             )
