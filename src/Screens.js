@@ -3,10 +3,6 @@ import PropTypes from "prop-types";
 import Screen from "./Screen";
 
 class Screens extends Component{
-    constructor(props) {
-        super(props);
-        this.handleLanguageChange = this.handleLanguageChange.bind(this);
-      }
       
     static propTypes = {
         screens: PropTypes.object.isRequired,
@@ -17,16 +13,18 @@ class Screens extends Component{
         language: this.props.language
     };
 
-    handleLanguageChange(e) {
-        this.setState({language: e.target.value});
+
+    static getDerivedStateFromProps(nextProps, prevState){
+        if(nextProps.language!==prevState.language){
+            return {language : nextProps.language};
+        }else return null;
     }
 
     generateComponent(screens){
         let items = [];
         for (var sc in screens) {
             if (screens.hasOwnProperty(sc)) {
-                items.push(<Screen name={sc} screen={screens[sc]} language={this.state.language}
-                    handleLanguageChange={this.handleLanguageChange.bind(this)}/>);
+                items.push(<Screen key={sc} name={sc} screen={screens[sc]} language={this.state.language}/>);
             }
         }
         return items;

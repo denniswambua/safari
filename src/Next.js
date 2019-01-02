@@ -1,26 +1,36 @@
 import React, {Component} from "react";
 import PropTypes from "prop-types";
 
-class nextOptions extends Component{
+class NextOptions extends Component{
     static propTypes = {
         nextOptions: PropTypes.object.isRequired
     }
 
+    state = {
+        nextOptions: this.props.nextOptions
+    }
+
     generateContent(input, screen){
         return (
-            <div className="columns">
+            <div className="columns" key={input + screen}>
                 <div className="column">
                     <div className="control">
-                        <input className="input is-small" type="text" placeholder="" value={input}/>
+                        <input className="input is-small" type="text" placeholder="" value={input}
+                            onChange={this.handleChange}/>
                     </div>
                 </div>
                 <div className="column">
                     <div className="control">
-                        <input className="input is-small" type="text" placeholder="" value={screen}/>
+                        <input className="input is-small" type="text" placeholder="" value={screen}
+                            onChange={this.handleChange}/>
                     </div>
                 </div>
             </div>
         )
+    }
+
+    handleChange(e) {
+        //this.setState({nextOptions: e.target.value});
     }
 
     generateComponent(nextOptions){
@@ -35,7 +45,7 @@ class nextOptions extends Component{
     }
 
     render(){
-        const nextOptions = this.props.nextOptions 
+        const nextOptions = this.state.nextOptions 
         if(Object.keys(nextOptions).length === 0 && nextOptions.constructor === Object){
             return <p>Quit Screen</p>          
         }else{ 
@@ -46,4 +56,4 @@ class nextOptions extends Component{
     }
 }
 
-export default nextOptions
+export default NextOptions

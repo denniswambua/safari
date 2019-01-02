@@ -23,6 +23,10 @@ class Form extends Component{
     handleLanguageChange(e) {
         this.setState({language: e.target.value});
     }
+
+    handleInitialSCreenChange(e) {
+        this.setState({initial_screen: e.target.value});
+    }
     
 
     createLanguageItems(languages) {
@@ -43,7 +47,8 @@ class Form extends Component{
                     <div className="field">
                         <label className="label">Initial Screen</label>
                         <div className="control">
-                            <input className="input" type="text" placeholder="" value={this.state.initial_screen}/>
+                            <input className="input" type="text" placeholder="" value={this.state.initial_screen}
+                            onChange={this.handleInitialSCreenChange}/>
                         </div>
                     </div>
                     <div className="field">
@@ -56,8 +61,9 @@ class Form extends Component{
                         </div>
                     </div>
                     <h2 className="subtitle">Screens</h2>
-                    <div className="box" ><Screens screens={this.state.screens} language={this.state.language}
-                        handleLanguageChange={this.handleLanguageChange.bind(this)}/></div>
+                    <div className="box" >
+                        <Screens screens={this.state.screens} language={this.state.language}/>
+                    </div>
                     
                 </div>
             )
