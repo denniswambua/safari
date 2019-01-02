@@ -21,7 +21,7 @@ import Form from "./Form";
 //   }
 // }
 const App = () => (
-  <DataProvider endpoint="api/lead/" 
+  <DataProvider endpoint="http://localhost:9300/journey/hubtel-gh/survey?type=unpopulated" 
                 render={data => <Form data={data} />} />
 );
 
