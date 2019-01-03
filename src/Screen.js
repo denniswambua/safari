@@ -39,10 +39,8 @@ class Screen extends Component{
     render(){
         return (
             <Draggable
-                axis="x"
+                axis="both"
                 handle=".handle"
-                defaultPosition={{x: 0, y: 0}}
-                position={null}
                 grid={[25, 25]}
                 onStart={this.handleStart}
                 onDrag={this.handleDrag}
