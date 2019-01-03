@@ -14,18 +14,28 @@ class Form extends Component{
         data: PropTypes.object.isRequired
     }
 
-    state ={
+    state = {
         initial_screen: this.props.data.initial_screen,
         screens: this.props.data.screens,
-        language: this.props.data.languages[0]
+        language: this.props.data.languages[0],
+        partner: this.props.data.partner,
+        product: this.props.data.product
     };
 
     handleLanguageChange(e) {
         this.setState({language: e.target.value});
     }
 
-    handleInitialSCreenChange(e) {
+    handleInitialScreenChange(e) {
         this.setState({initial_screen: e.target.value});
+    }
+
+    handlePartnerChange(e) {
+        this.setState({partner: e.target.value});
+    }
+
+    handleProductChange(e) {
+        this.setState({product: e.target.value});
     }
     
 
@@ -43,12 +53,26 @@ class Form extends Component{
             message = <p>Nothing to show</p>
         }else{
             message = (
-                <div>
+                <div className="container">
                     <div className="field">
                         <label className="label">Initial Screen</label>
                         <div className="control">
                             <input className="input" type="text" placeholder="" value={this.state.initial_screen}
-                            onChange={this.handleInitialSCreenChange}/>
+                            onChange={this.handleInitialScreenChange}/>
+                        </div>
+                    </div>
+                    <div className="field">
+                        <label className="label">Partner</label>
+                        <div className="control">
+                            <input className="input" type="text" placeholder="" value={this.state.partner}
+                            onChange={this.handlePartnerChange}/>
+                        </div>
+                    </div>
+                    <div className="field">
+                        <label className="label">Product</label>
+                        <div className="control">
+                            <input className="input" type="text" placeholder="" value={this.state.product}
+                            onChange={this.handleProductChange}/>
                         </div>
                     </div>
                     <div className="field">

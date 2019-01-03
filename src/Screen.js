@@ -41,12 +41,12 @@ class Screen extends Component{
             <Draggable
                 axis="both"
                 handle=".handle"
-                grid={[25, 25]}
+                grid={[5, 5]}
                 onStart={this.handleStart}
                 onDrag={this.handleDrag}
                 onStop={this.handleStop}
                 bounds="parent">
-                <div className="screen is-small">
+                <div className="screen">
                     <strong className="handle">{this.state.screenName}</strong>
                     <div className="field">
                         <label className="label">Name</label>
