@@ -18,7 +18,7 @@ class Nav extends Component{
         this.setState({partner: e.target.value});
     }
 
-    handleProductChange= (e) =>  {
+    handleProductChange = (e) =>  {
         this.setState({product: e.target.value});
     }
 
@@ -46,8 +46,7 @@ class Nav extends Component{
                         </div>
                         <div className="navbar-item">
                             <label className="checkbox">
-                                <input type="checkbox" defaultValue=""
-                                    onBlur={this.handleProductChange}/>
+                                <input type="checkbox" defaultValue=""/>
                                 Populated?
                             </label>
                         </div>
