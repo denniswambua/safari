@@ -15,10 +15,10 @@ class Screen extends Component{
 
     state = {
         language: this.props.language,
-        screenName: this.props.name,
-        screenLabel: this.props.screen.label,
-        screenMsg: this.props.screen.msg,
-        screenNext: this.props.screen.next
+        name: this.props.name,
+        label: this.props.screen.label,
+        msg: this.props.screen.msg,
+        next: this.props.screen.next
     };
 
     static getDerivedStateFromProps(nextProps, prevState){
@@ -28,11 +28,11 @@ class Screen extends Component{
     }
 
     handleNameChange(e) {
-        this.setState({screenName: e.target.value});
+        this.setState({name: e.target.value});
     }
 
     handleLabelChange(e) {
-        this.setState({screenLabel: e.target.value});
+        this.setState({label: e.target.value});
     }
 
 
@@ -47,26 +47,26 @@ class Screen extends Component{
                 onStop={this.handleStop}
                 bounds="parent">
                 <div className="screen">
-                    <strong className="handle">{this.state.screenName}</strong>
+                    <strong className="handle">{this.state.name}</strong>
                     <div className="field">
                         <label className="label">Name</label>
                         <div className="control">
-                            <input className="input is-small" type="text" placeholder="" value={this.state.screenName}
+                            <input className="input is-small" type="text" placeholder="" value={this.state.name}
                               onChange={this.handleNameChange}/>
                     </div>
                     </div>
                     <div className="field">
                         <label className="label">Label</label>
                         <div className="control">
-                            <input className="input is-small" type="text" placeholder="" value={this.state.screenLabel}
+                            <input className="input is-small" type="text" placeholder="" value={this.state.label}
                                 onChange={this.handleLabelChange}/>
                     </div>
                     </div>
                     <div className="field">
                         <label className="label">Message</label>
-                        <Msg msg={this.state.screenMsg} language={this.state.language} />
+                        <Msg msg={this.state.msg} language={this.state.language} />
                     </div>
-                    <Next nextOptions={this.state.screenNext}/>
+                    <Next nextOptions={this.state.next}/>
                 </div>
             </Draggable>
         )

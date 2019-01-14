@@ -1,27 +1,37 @@
 import React, {Component} from "react";
-import PropTypes from "prop-types";
-
-import DataProvider from "./DataProvider";
+import { connect } from 'react-redux';
 import Form from "./Form";
-import { throws } from "assert";
-
-const hermes = "http://localhost:9300";
+import { getData } from "./actions"
 
 class Nav extends Component{
 
     state = {
         partner: "hubtel-gh",
         product: "survey",
+        populated: false
+
     }
 
     handlePartnerChange = (e) => {
-        this.setState({partner: e.target.value});
+        this.setState({partner: e.target.value})
     }
 
     handleProductChange = (e) =>  {
-        this.setState({product: e.target.value});
+        this.setState({product: e.target.value})
     }
 
+    handlePopulatedChange = (e) => {
+        this.setState({populated: e.target.checked})
+    }
+
+    handleOnClick = (e) => {
+        this.props.getData(this.state);
+    }
+
+    componentDidMount() {
+        this.props.getData(this.state);
+    }
+    
 
     render() {
         return (
@@ -46,9 +56,16 @@ class Nav extends Component{
                         </div>
                         <div className="navbar-item">
                             <label className="checkbox">
-                                <input type="checkbox" defaultValue=""/>
+                                <input type="checkbox" defaultValue="" onChange={this.handlePopulatedChange}/>
                                 Populated?
                             </label>
+                        </div>
+                        <div className="navbar-item">
+                            <div className="buttons">
+                                <a className="button is-link" onClick={this.handleOnClick}>
+                                    <strong>Fetch</strong>
+                                </a>
+                            </div>
                         </div>
                     </div>
 
@@ -63,8 +80,7 @@ class Nav extends Component{
                     </div>
                 </div>
             </nav>
-            <DataProvider endpoint={hermes} partner={this.state.partner} product={this.state.product} 
-                 render={data => <Form data={data} />} />
+                <Form />
             </div>
             
         )
@@ -73,4 +89,8 @@ class Nav extends Component{
 
 }
 
-export default Nav;
+export default connect(
+    NaN,
+    { getData }
+  )(Nav);
+
