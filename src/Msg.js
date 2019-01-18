@@ -25,7 +25,7 @@ class Msg extends Component{
         }else return null;
     }
     
-    handleMsgChange(e) {
+    handleMsgChange = (e) => {
         if(typeof this.state.msg === "object"){
             var tempMsg = {} 
             tempMsg[this.state.language] = e.target.value

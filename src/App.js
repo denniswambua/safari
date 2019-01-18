@@ -1,12 +1,13 @@
 import React from 'react';
 import './App.css';
-
-import DataProvider from "./DataProvider";
-import Form from "./Form";
+import { Provider } from 'react-redux';
 import Nav from "./Nav";
+import store from './store';
 
 const App = () => (
-    <Nav/>
+    <Provider store={store}>
+        <Nav/>
+    </Provider>
 );
 
 export default App;

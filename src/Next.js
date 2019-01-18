@@ -29,7 +29,7 @@ class NextOptions extends Component{
         )
     }
 
-    handleChange(e) {
+    handleChange = (e) => {
         //this.setState({nextOptions: e.target.value});
     }
 
