@@ -2,8 +2,6 @@ import React, {Component} from "react";
 import Draggable from 'react-draggable';
 import PropTypes from "prop-types";
 
-import Next from "./Next";
-import Msg from "./Msg"
 
 class Screen extends Component{
 
@@ -25,6 +23,56 @@ class Screen extends Component{
         if(nextProps.language!==prevState.language){
             return {language : nextProps.language};
         }else return null;
+    }
+
+    generateNextContent(input, screen){
+        return (
+            <div className="columns" key={input + screen}>
+                <div className="column">
+                    <div className="control">
+                        <input className="input is-small" type="text" placeholder="" value={input}
+                            onChange={this.handleChange}/>
+                    </div>
+                </div>
+                <div className="column">
+                    <div className="control">
+                        <input className="input is-small" type="text" placeholder="" value={screen}
+                            onChange={this.handleChange}/>
+                    </div>
+                </div>
+            </div>
+        )
+    }
+
+    handleChange = (e) => {
+        
+    }
+
+    generateNextComponent(){
+        if(Object.keys(this.state.next).length === 0 && this.state.next === Object){
+            return <p>Quit Screen</p>          
+        }else{ 
+            let items = [];    
+            for (var prop in this.state.next) {
+                if (this.state.next.hasOwnProperty(prop)){
+                    items.push(this.generateNextContent(prop, this.state.next[prop])); 
+                }
+            }
+            return items;
+        }
+    }
+
+    handleMsgChange = (e) => {
+    }
+
+    generateMsgComponent(){
+        var text = (typeof this.state.msg === "object")? this.state.msg[this.state.language]:this.state.msg
+        return  (
+            <div className="control">
+                <textarea className="textarea is-small" type="text" placeholder="" value={text}
+                    onChange={this.handleMsgChange}/>
+            </div>
+        )
     }
 
     handleNameChange(e) {
@@ -63,10 +111,11 @@ class Screen extends Component{
                     </div>
                     </div>
                     <div className="field">
-                        <label className="label">Message</label>
-                        <Msg msg={this.state.msg} language={this.state.language} />
+                        {this.generateMsgComponent()}
                     </div>
-                    <Next nextOptions={this.state.next}/>
+                    <div className="field">
+                        {this.generateNextComponent()}
+                    </div>
                 </div>
             </Draggable>
         )

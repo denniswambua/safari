@@ -18,7 +18,7 @@ export function getData(payload) {
         return fetch(url)
             .then(response => response.json())
             .then(json => {
-            dispatch({ type: DATA_LOADED, payload: json });
-        });
+                dispatch({ type: DATA_LOADED, payload: json });
+            }).catch(e =>{});
     };
   }
