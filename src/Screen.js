@@ -1,6 +1,9 @@
 import React, {Component} from "react";
 import Draggable from 'react-draggable';
 import PropTypes from "prop-types";
+import { connect } from 'react-redux';
+
+import { updateScreen } from "./actions"
 
 
 class Screen extends Component{
@@ -63,6 +66,15 @@ class Screen extends Component{
     }
 
     handleMsgChange = (e) => {
+        var update_text = e.target.value;
+        var temp_msg = this.state.msg;
+
+        if (typeof this.state.msg === "object"){
+            temp_msg[this.state.language] = update_text
+        }else{
+            temp_msg = update_text
+        }
+        this.setState({msg: temp_msg});
     }
 
     generateMsgComponent(){
@@ -75,12 +87,12 @@ class Screen extends Component{
         )
     }
 
-    handleNameChange(e) {
-        this.setState({name: e.target.value});
+    handleLabelChange = (e) => {
+        this.setState({label: e.target.value});
     }
 
-    handleLabelChange(e) {
-        this.setState({label: e.target.value});
+    handleUpdateScreen = (e) => {
+        this.props.updateScreen(this.state);
     }
 
 
@@ -95,17 +107,17 @@ class Screen extends Component{
                 onStop={this.handleStop}
                 bounds="parent">
                 <div className="screen">
+                    <div className="buttons is-right">
+                        <a className="button is-link is-small is-outlined" onClick={this.handleUpdateScreen}>
+                            <strong>Update</strong>
+                        </a>
+                    </div>
                     <strong className="handle">{this.state.name}</strong>
-                    <div className="field">
-                        <label className="label">Name</label>
-                        <div className="control">
-                            <input className="input is-small" type="text" placeholder="" value={this.state.name}
-                              onChange={this.handleNameChange}/>
-                    </div>
-                    </div>
-                    <div className="field">
-                        <label className="label">Label</label>
-                        <div className="control">
+                    <div className="field is-horizontal">
+                        <div className="field-label">
+                            <label className="label">Label</label>
+                        </div>
+                        <div className="field-body">
                             <input className="input is-small" type="text" placeholder="" value={this.state.label}
                                 onChange={this.handleLabelChange}/>
                     </div>
@@ -122,4 +134,4 @@ class Screen extends Component{
     }
 }
 
-export default Screen;
+export default connect(NaN,{ updateScreen })(Screen);

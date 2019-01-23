@@ -2,6 +2,9 @@ import React, {Component} from "react";
 import { connect } from 'react-redux';
 import Form from "./Form";
 import { getData } from "./actions"
+import Popup from 'reactjs-popup'
+
+
 
 class Nav extends Component{
 
@@ -28,6 +31,11 @@ class Nav extends Component{
         this.props.getData(this.state);
     }
 
+    exportJourney(){
+        var journey = localStorage.getItem("journey")
+        return journey
+    }
+
     componentDidMount() {
         this.props.getData(this.state);
     }
@@ -36,7 +44,7 @@ class Nav extends Component{
     render() {
         return (
             <div className="section">
-            <nav className="navbar is-primary" role="navigation" aria-label="main navigation">
+            <nav className="navbar is-primary"  aria-label="main navigation">
                 <div className="navbar-brand ">
                     <span className="icon is-large">
                         <i className="fas fa-home fa-2x"></i>
@@ -72,9 +80,9 @@ class Nav extends Component{
                     <div className="navbar-end">
                         <div className="navbar-item">
                             <div className="buttons">
-                                <a className="button is-link">
-                                    <strong>Export</strong>
-                                </a>
+                                <Popup trigger={<button className="button is-link">Export</button>} modal closeOnDocumentClick>
+                                    <div className="box"><pre>{this.exportJourney()}</pre></div>
+                                </Popup>
                             </div>
                         </div>
                     </div>
