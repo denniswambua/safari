@@ -1,2 +1,3 @@
 export const CHANGE_LANGUAGE = "CHANGE_LANGUAGE";
 export const DATA_LOADED = "DATA_LOADED"
+export const UPDATE_SCREEN = "UPDATE_SCREEN"

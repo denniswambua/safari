@@ -1,4 +1,4 @@
-import { CHANGE_LANGUAGE, DATA_LOADED } from "./actions_types"
+import { CHANGE_LANGUAGE, DATA_LOADED, UPDATE_SCREEN } from "./actions_types"
 
 
 const proxyurl = "http://localhost:8080/";
@@ -18,7 +18,11 @@ export function getData(payload) {
         return fetch(url)
             .then(response => response.json())
             .then(json => {
-            dispatch({ type: DATA_LOADED, payload: json });
-        });
+                dispatch({ type: DATA_LOADED, payload: json });
+            }).catch(e =>{});
     };
   }
+
+export function updateScreen(payload){
+    return { type: UPDATE_SCREEN, payload }
+}

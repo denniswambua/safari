@@ -9,5 +9,10 @@ const App = () => (
         <Nav/>
     </Provider>
 );
+store.subscribe(() => {
+    var journey = JSON.parse(JSON.stringify(store.getState()));
+    delete journey["language"]
+    localStorage.setItem("journey", JSON.stringify(journey, null, 2))
+})
 
 export default App;
